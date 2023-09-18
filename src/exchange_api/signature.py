@@ -7,14 +7,14 @@ import aiohttp
 import asyncio
 
 
-async def fetch_url(url: str, header: dict, params: dict, method: str, signature: str) -> dict:
+async def fetch_url(url: str, header: dict, params: dict, req_method: str, signature: str) -> dict:
     params['signature'] = signature
     async with aiohttp.ClientSession() as session:
-        if method == 'post':
+        if req_method == 'post':
             method = session.post
-        elif method == 'get':
+        elif req_method == 'get':
             method = session.get
-        elif method == 'delete':
+        elif req_method == 'delete':
             method = session.delete
         async with method(url + '?' + Signature.generate_url(params), headers=header) as response:
             return json.loads(await response.text())
