@@ -1,0 +1,6 @@
+.env
+**/__pycache__
+**/migrations
+/venv
+alembic.ini
+.idea/
